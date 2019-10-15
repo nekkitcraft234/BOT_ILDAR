@@ -2,10 +2,10 @@ import vk_api
 from vk_api.utils import get_random_id 
 from vk_api.bot_longpoll import VkBotLongPoll 
 from vk_api.bot_longpoll import VkBotEventType 
-TOKEN = '' 
+TOKEN = '898c633b3fb6081b7ef587731f0a4a98bad058d289300018e30cfd3df948a2c7d812b68330dff082f0aba' 
 vk_session=vk_api.VkApi(token=TOKEN ) 
 vk=vk_session.get_api() 
-longpoll = VkBotLongPoll(vk_session,'') 
+longpoll = VkBotLongPoll(vk_session,'187559011')
 for event in longpoll.listen():#Проверка действий 
     print(event)
     if event.type == VkBotEventType.MESSAGE_NEW:
