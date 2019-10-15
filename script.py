@@ -5,7 +5,7 @@ from vk_api.bot_longpoll import VkBotEventType
 TOKEN = '898c633b3fb6081b7ef587731f0a4a98bad058d289300018e30cfd3df948a2c7d812b68330dff082f0aba' 
 vk_session=vk_api.VkApi(token=TOKEN ) 
 vk=vk_session.get_api() 
-longpoll = VkBotLongPoll(vk_session,'187559011')
+longpoll = VkBotLongPoll(vk_session,'187559011') 
 for event in longpoll.listen():#Проверка действий 
     print(event)
     if event.type == VkBotEventType.MESSAGE_NEW:
@@ -26,13 +26,16 @@ for event in longpoll.listen():#Проверка действий
                 #reply = 'Извиняюсь, в данный момент паблик находится в разработке и в работу еще не вошел. Возможно, я уведомлю вас о начале работы.'
             elif event.object.text == 'Ты просто робот' or event.object.text == 'ты просто бот':
                 reply = 'Ну... Да. И я этим горжусь'
-            elif event.object.text[0:3] == 'Код' or event.object.text[0:3] == 'код':
+            elif event.object.text[0:7] == 'Функция' or event.object.text[0:7] == 'функция':
                 try:
-                    reply = eval(event.object.text[4:])
+                    reply = eval(event.object.text[8:])
                 except:
                     reply = 'Что-то пошло не так...'
             else:
                 reply = 'Не понял, просьба говорить корректно'
         else: 
             reply = '..?'
-    print(reply)
+        vk.messages.send(
+            user_id=event.obj.from_id,
+            random_id=get_random_id(),
+            message=reply)
